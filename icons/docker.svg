@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Docker sidebar">
+  <defs>
+    <linearGradient id="dsb-icon-bg" x1="10" y1="6" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2C7BEA"/>
+      <stop offset="1" stop-color="#1648A8"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#dsb-icon-bg)"/>
+  <rect x="13" y="16" width="38" height="12" rx="3.6" fill="#FFFFFF" fill-opacity="0.98"/>
+  <rect x="13" y="30.5" width="38" height="9.6" rx="3.2" fill="#FFFFFF" fill-opacity="0.8"/>
+  <rect x="17.5" y="42.5" width="29" height="6.6" rx="2.8" fill="#FFFFFF" fill-opacity="0.56"/>
+  <circle cx="45.5" cy="22" r="3" fill="#2C7BEA"/>
+  <circle cx="45.5" cy="35.3" r="2.6" fill="#2C7BEA" fill-opacity="0.65"/>
+</svg>

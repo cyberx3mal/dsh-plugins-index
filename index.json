@@ -1,0 +1,267 @@
+{
+  "format": 1,
+  "title": {
+    "en": "cyberx3mal DSH plugins",
+    "ru": "Плагины cyberx3mal для DSH"
+  },
+  "description": {
+    "en": "Sidebar widgets and helpers for the DeepSeek Harness Web UI",
+    "ru": "Виджеты и помощники для сайдбара DeepSeek Harness"
+  },
+  "metadata": {
+    "categories": {
+      "widgets": {
+        "title": {
+          "en": "Widgets",
+          "ru": "Виджеты"
+        }
+      },
+      "integrations": {
+        "title": {
+          "en": "Integrations",
+          "ru": "Интеграции"
+        }
+      }
+    },
+    "labels": {
+      "sidebar": {
+        "title": {
+          "en": "Sidebar",
+          "ru": "Сайдбар"
+        }
+      },
+      "notifications": {
+        "title": {
+          "en": "Notifications",
+          "ru": "Уведомления"
+        }
+      }
+    },
+    "sortKeys": {
+      "github_stars": {
+        "title": {
+          "en": "GitHub stars",
+          "ru": "Звёзды GitHub"
+        },
+        "order": "desc"
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "dsh-plugin-project-sounds",
+      "title": {
+        "en": "Project sounds",
+        "ru": "Звуки проектов"
+      },
+      "description": {
+        "en": "Per-project sound cues for turn completion, pending approvals and questions, and failures.",
+        "ru": "Звуковые сигналы по проектам: завершение хода, подтверждения и вопросы, ошибки."
+      },
+      "icon": "icons/sounds.svg",
+      "author": "cyberx3mal",
+      "homepage": "https://github.com/cyberx3mal/DSH-Sounds#readme",
+      "repository": {
+        "url": "https://github.com/cyberx3mal/DSH-Sounds"
+      },
+      "metadata": {
+        "category": "widgets",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "sound",
+          "notifications"
+        ],
+        "labels": [
+          "notifications"
+        ],
+        "sortKeys": {
+          "github_stars": 0
+        }
+      },
+      "versions": [
+        {
+          "version": "1.1.0",
+          "publishTimestamp": 1794510705,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Sounds",
+            "commit": "63a7d9e65ff464ef9eda1b431283b4d1bd8b9a8f"
+          }
+        }
+      ]
+    },
+    {
+      "name": "@local/docker-sidebar",
+      "title": {
+        "en": "Docker sidebar",
+        "ru": "Docker в сайдбаре"
+      },
+      "description": {
+        "en": "Docker state, compose projects and container controls in the sidebar footer.",
+        "ru": "Состояние Docker, compose-проекты и управление контейнерами в сайдбаре."
+      },
+      "icon": "icons/docker.svg",
+      "author": "cyberx3mal",
+      "homepage": "https://github.com/cyberx3mal/DSH-Docker#readme",
+      "repository": {
+        "url": "https://github.com/cyberx3mal/DSH-Docker"
+      },
+      "metadata": {
+        "category": "integrations",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "docker",
+          "sidebar"
+        ],
+        "labels": [
+          "sidebar"
+        ],
+        "sortKeys": {
+          "github_stars": 0
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1794511387,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Docker",
+            "commit": "58cb8e9a47b4bfabe013d73f2d0778c2c9cf430c"
+          }
+        }
+      ]
+    },
+    {
+      "name": "@local/sidebar-widget-order",
+      "title": {
+        "en": "Sidebar widget order",
+        "ru": "Порядок виджетов сайдбара"
+      },
+      "description": {
+        "en": "Reorder the sidebar footer widgets with up and down arrows.",
+        "ru": "Меняет порядок виджетов в нижней части сайдбара стрелками."
+      },
+      "icon": "icons/sidebar-order.svg",
+      "author": "cyberx3mal",
+      "homepage": "https://github.com/cyberx3mal/DSH-sidebar-widget-order#readme",
+      "repository": {
+        "url": "https://github.com/cyberx3mal/DSH-sidebar-widget-order"
+      },
+      "metadata": {
+        "category": "widgets",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "sidebar",
+          "layout"
+        ],
+        "labels": [
+          "sidebar"
+        ],
+        "sortKeys": {
+          "github_stars": 0
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1794511469,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-sidebar-widget-order",
+            "commit": "e143032ffb49bcf7896b6ce622162ca38ca3662e"
+          }
+        }
+      ]
+    },
+    {
+      "name": "@local/projects-board",
+      "title": {
+        "en": "Projects board",
+        "ru": "Проекты"
+      },
+      "description": {
+        "en": "Colour-coded chat states, unread-finish markers, filters, accordion list and inline approvals.",
+        "ru": "Цветовые состояния чатов, отметки о непрочитанном завершении, фильтры, аккордеон и подтверждения на месте."
+      },
+      "icon": "icons/projects.svg",
+      "author": "cyberx3mal",
+      "homepage": "https://github.com/cyberx3mal/DSH-Projects#readme",
+      "repository": {
+        "url": "https://github.com/cyberx3mal/DSH-Projects"
+      },
+      "metadata": {
+        "category": "widgets",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "projects",
+          "sidebar"
+        ],
+        "labels": [
+          "sidebar"
+        ],
+        "sortKeys": {
+          "github_stars": 0
+        }
+      },
+      "versions": [
+        {
+          "version": "1.7.0",
+          "publishTimestamp": 1794512169,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Projects",
+            "commit": "63e02db99053247ccd8f175602eb81cbcc43011c"
+          }
+        }
+      ]
+    },
+    {
+      "name": "@local/music-board",
+      "title": {
+        "en": "Music board",
+        "ru": "Музыка"
+      },
+      "description": {
+        "en": "Now-playing card with cover art and playback controls for every media source on this PC.",
+        "ru": "Карточка «сейчас играет» с обложкой и управлением воспроизведением для всех медиаисточников на этом ПК."
+      },
+      "icon": "icons/music.svg",
+      "author": "cyberx3mal",
+      "homepage": "https://github.com/cyberx3mal/DSH-Music#readme",
+      "repository": {
+        "url": "https://github.com/cyberx3mal/DSH-Music"
+      },
+      "metadata": {
+        "category": "widgets",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "music",
+          "sidebar"
+        ],
+        "labels": [
+          "sidebar"
+        ],
+        "sortKeys": {
+          "github_stars": 0
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1794514824,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Music",
+            "commit": "a91c1647cc75bf35b33b7e7dc9abc8d2d8c60394"
+          }
+        }
+      ]
+    }
+  ]
+}

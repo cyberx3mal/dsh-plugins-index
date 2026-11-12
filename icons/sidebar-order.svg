@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sidebar widget order">
+  <rect x="6" y="6" width="52" height="52" rx="13" fill="#247bbf"/>
+  <g fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 24h20"/>
+    <path d="M18 40h20"/>
+    <path d="M48 15v10M48 25l-3.4-3.4M48 25l3.4-3.4"/>
+    <path d="M48 49V39M48 39l-3.4 3.4M48 39l3.4 3.4"/>
+  </g>
+</svg>
