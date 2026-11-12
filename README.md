@@ -9,17 +9,22 @@ icons/*.svg        иконки, лежат рядом с индексом (сс
 update-index.mjs   пересобирает index.json из локальных чек-аутов
 ```
 
-## Публикация
+## Подключить в DSH
 
-1. Создайте **публичный** репозиторий `dsh-plugins-index` и запушьте это содержимое в `main`.
-2. Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`.
-3. Индекс будет доступен по адресу
-   `https://cyberx3mal.github.io/dsh-plugins-index/index.json`
-4. В DSH: **Plugins → Discover → «Добавить источник индекса»** → вставить этот URL.
+Индекс уже опубликован:
 
-Без Pages работает и raw-адрес
-`https://raw.githubusercontent.com/cyberx3mal/dsh-plugins-index/main/index.json`
-(отдаёт `text/plain` — DSH это не проверяет; кеш edge около 5 минут).
+```
+https://raw.githubusercontent.com/cyberx3mal/dsh-plugins-index/main/index.json
+```
+
+В DSH: **Plugins → Discover → «Добавить источник индекса»** → вставить этот URL → «Добавить».
+Этот адрес отдаёт `text/plain` — DSH тип содержимого не проверяет; кеш edge около 5 минут.
+
+## GitHub Pages (по желанию, для красивого адреса)
+
+Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`. Через минуту
+`https://cyberx3mal.github.io/dsh-plugins-index/index.json` отдаёт тот же файл с `application/json`.
+В Discover можно оставить любой из двух адресов.
 
 Редиректы запрещены: используйте только финальные адреса. Ссылки вида
 `https://github.com/cyberx3mal/dsh-plugins-index/raw/main/index.json` (302) и `.../blob/...` (HTML) не подойдут.
