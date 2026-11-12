@@ -40,6 +40,18 @@ https://raw.githubusercontent.com/cyberx3mal/dsh-plugins-index/main/index.json
 В DSH: **Plugins → Discover → «Добавить источник индекса»** → вставить этот URL → «Добавить».
 Этот адрес отдаёт `text/plain` — DSH тип содержимого не проверяет; кеш edge около 5 минут.
 
+## Сайт
+
+`index.html` — статическая страница подборки: читает `index.json` рядом с собой, показывает карточки
+с иконками, поиск, категории, сортировку и кнопку «Скопировать установку».
+
+```
+https://cyberx3mal.github.io/dsh-plugins-index/
+```
+
+Публикуется через GitHub Pages (Settings → Pages → Deploy from a branch → `main` / `/ (root)`).
+Страница не требует сборки и не дублирует данные: всё берётся из `index.json`.
+
 ## GitHub Pages (по желанию, для красивого адреса)
 
 Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`. Через минуту

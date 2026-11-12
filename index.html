@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Плагины для DSH — подборка cyberx3mal</title>
+<meta name="description" content="Подборка плагинов для DeepSeek Harness: виджеты сайдбара, панель виджетов, Docker, музыка и другие. Установка из индекса в один клик.">
+<meta name="color-scheme" content="dark light">
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #121821;
+    --panel-2: #17202b;
+    --text: #e8eef7;
+    --muted: #93a2b7;
+    --line: #233142;
+    --accent: #69b9ff;
+    --accent-2: #45e7a4;
+    --danger: #ff7b7b;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --panel-2: #f0f4f9;
+      --text: #101722;
+      --muted: #5a6a80;
+      --line: #dbe4ef;
+      --accent: #2f7fd8;
+      --accent-2: #0f9d6e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: radial-gradient(1200px 600px at 20% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%), var(--bg);
+    color: var(--text);
+    font: 16px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+  header { padding: 56px 0 28px; }
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    background: linear-gradient(100deg, var(--text), var(--accent) 70%, var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 62ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .button {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--text); font: inherit; cursor: pointer;
+  }
+  .button:hover { background: var(--panel-2); text-decoration: none; }
+  .button.primary { border-color: transparent; background: linear-gradient(100deg, var(--accent), var(--accent-2)); color: #05121b; font-weight: 600; }
+  section.connect {
+    margin: 8px 0 26px; padding: 18px 20px; border: 1px solid var(--line);
+    border-radius: var(--radius); background: var(--panel);
+  }
+  section.connect h2 { margin: 0 0 6px; font-size: 16px; }
+  section.connect p { margin: 0 0 12px; color: var(--muted); }
+  .copyrow { display: flex; gap: 8px; flex-wrap: wrap; }
+  .copyrow code {
+    flex: 1 1 420px; min-width: 0; overflow-x: auto; white-space: nowrap;
+    padding: 10px 12px; border-radius: 10px; background: var(--panel-2); border: 1px solid var(--line);
+    font: 13px/1.4 "Cascadia Mono", ui-monospace, Consolas, monospace;
+  }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+  .toolbar input[type="search"] {
+    flex: 1 1 260px; min-width: 0; padding: 10px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--panel); color: var(--text); font: inherit;
+  }
+  .toolbar select {
+    padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--text); font: inherit;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip {
+    padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line);
+    background: transparent; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); padding-bottom: 40px; }
+  .card {
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 18px; border: 1px solid var(--line); border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .card-head { display: flex; gap: 12px; align-items: flex-start; }
+  .icon { width: 44px; height: 44px; flex: none; border-radius: 12px; background: var(--panel-2); display: grid; place-items: center; overflow: hidden; }
+  .icon img { width: 34px; height: 34px; }
+  .icon svg { width: 22px; height: 22px; opacity: 0.5; }
+  .titles { min-width: 0; }
+  .card h3 { margin: 0; font-size: 17px; line-height: 1.3; }
+  .pkg { display: block; margin-top: 2px; color: var(--muted); font: 12px/1.4 "Cascadia Mono", ui-monospace, Consolas, monospace; overflow-wrap: anywhere; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .tag.third-party { border-color: color-mix(in srgb, var(--accent-2) 50%, var(--line)); color: var(--accent-2); }
+  .meta { display: flex; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 13px; margin-top: auto; }
+  .meta b { color: var(--text); font-weight: 600; }
+  .card-foot { display: flex; gap: 10px; align-items: center; }
+  .card-foot .button { padding: 7px 13px; font-size: 14px; }
+  .card-foot a.plain { color: var(--muted); font-size: 14px; }
+  .error { padding: 18px; border-radius: var(--radius); border: 1px solid var(--danger); color: var(--danger); }
+  .empty { padding: 32px; text-align: center; color: var(--muted); }
+  footer { padding: 24px 0 48px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  .toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px);
+    padding: 10px 18px; border-radius: 999px; background: var(--text); color: var(--bg);
+    font-weight: 600; opacity: 0; pointer-events: none; transition: all 0.2s ease;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Подборка плагинов для DSH</h1>
+    <p class="lede" id="lede">Индекс формата 1 для DeepSeek Harness: мои плагины для сайдбара плюс пара плагинов сообщества.</p>
+    <div class="actions">
+      <a class="button primary" href="#connect">Как подключить</a>
+      <a class="button" href="index.json">index.json</a>
+    </div>
+  </header>
+
+  <section class="connect" id="connect">
+    <h2>Добавить источник в DSH</h2>
+    <p>Plugins → Discover → «Добавить источник индекса» → вставить этот URL. После этого плагины ставятся в один клик.</p>
+    <div class="copyrow">
+      <code id="index-url"></code>
+      <button class="button" id="copy-url" type="button">Скопировать</button>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Поиск: имя, описание, автор…" aria-label="Поиск плагинов">
+    <select id="sort" aria-label="Сортировка">
+      <option value="index">Порядок индекса</option>
+      <option value="published">Дата публикации</option>
+      <option value="stars">Звёзды GitHub</option>
+      <option value="name">Имя</option>
+    </select>
+  </div>
+  <div class="chips" id="categories" role="group" aria-label="Категории"></div>
+
+  <div class="grid" id="grid" aria-live="polite"></div>
+  <div class="empty" id="empty" hidden></div>
+  <div class="error" id="error" hidden></div>
+  <footer>
+    <span id="updated"></span> · формат 1 · <a href="https://github.com/cyberx3mal/dsh-plugins-index">исходники индекса</a> ·
+    сторонние плагины помечены и принадлежат их авторам
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const INDEX_URL = new URL('index.json', location.href)
+  const state = { index: null, query: '', category: null, sort: 'index' }
+  const el = id => document.getElementById(id)
+  const grid = el('grid')
+  const errorBox = el('error')
+
+  const ru = navigator.language.toLowerCase().startsWith('ru')
+
+  function text(value, fallback = '') {
+    if (typeof value === 'string') return value
+    if (value && typeof value === 'object') {
+      return value[ru ? 'ru' : 'en'] ?? value.en ?? value.ru ?? Object.values(value)[0] ?? fallback
+    }
+    return fallback
+  }
+
+  function toast(message) {
+    const node = el('toast')
+    node.textContent = message
+    node.classList.add('show')
+    clearTimeout(toast.timer)
+    toast.timer = setTimeout(() => node.classList.remove('show'), 1800)
+  }
+
+  async function copy(value) {
+    try {
+      await navigator.clipboard.writeText(value)
+      toast('Скопировано')
+    } catch {
+      toast('Не удалось скопировать')
+    }
+  }
+
+  function installSpec(plugin, version) {
+    const source = version.source
+    if (source.type === 'npm') return `${plugin.name}@${version.version}`
+    const base = source.url.endsWith('.git') ? source.url : `${source.url}.git`
+    return `git+${base}#${source.commit}${source.path ? `&path:/${source.path}` : ''}`
+  }
+
+  function iconNode(plugin) {
+    const box = document.createElement('div')
+    box.className = 'icon'
+    if (plugin.icon) {
+      const img = document.createElement('img')
+      img.loading = 'lazy'
+      img.referrerPolicy = 'no-referrer'
+      img.alt = ''
+      img.src = new URL(plugin.icon, INDEX_URL).href
+      img.addEventListener('error', () => { box.replaceChildren(fallbackIcon()) })
+      box.append(img)
+    } else {
+      box.append(fallbackIcon())
+    }
+    return box
+  }
+
+  function fallbackIcon() {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    svg.setAttribute('viewBox', '0 0 24 24')
+    svg.setAttribute('fill', 'none')
+    svg.setAttribute('stroke', 'currentColor')
+    svg.setAttribute('stroke-width', '1.8')
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    path.setAttribute('d', 'M4 7h16M4 12h16M4 17h10')
+    svg.append(path)
+    return svg
+  }
+
+  function declareLabel(id) {
+    const declaration = state.index?.metadata?.labels?.[id]
+    return declaration ? text(declaration.title, id) : id
+  }
+
+  function card(plugin) {
+    const version = plugin.versions[0]
+    const labels = plugin.metadata.labels.map(id => ({ id, label: declareLabel(id) }))
+    const stars = plugin.metadata.sortKeys.github_stars
+    const node = document.createElement('article')
+    node.className = 'card'
+
+    const head = document.createElement('div')
+    head.className = 'card-head'
+    const titles = document.createElement('div')
+    titles.className = 'titles'
+    const h3 = document.createElement('h3')
+    h3.textContent = text(plugin.title, plugin.name)
+    const pkg = document.createElement('span')
+    pkg.className = 'pkg'
+    pkg.textContent = plugin.name
+    titles.append(h3, pkg)
+    head.append(iconNode(plugin), titles)
+
+    const description = document.createElement('p')
+    description.textContent = text(plugin.description, '')
+
+    const tags = document.createElement('div')
+    tags.className = 'tags'
+    for (const { id, label } of labels) {
+      const tag = document.createElement('span')
+      tag.className = 'tag' + (id === 'third-party' ? ' third-party' : '')
+      tag.textContent = label
+      tags.append(tag)
+    }
+
+    const meta = document.createElement('div')
+    meta.className = 'meta'
+    meta.append(fact('Версия', version.version))
+    if (plugin.author) meta.append(fact('Автор', plugin.author))
+    if (typeof stars === 'number') meta.append(fact('★ ' + stars, ''))
+    if (version.publishTimestamp) {
+      const date = new Date(version.publishTimestamp * 1000)
+      meta.append(fact('Опубликовано', date.toLocaleDateString(ru ? 'ru-RU' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' })))
+    }
+
+    const foot = document.createElement('div')
+    foot.className = 'card-foot'
+    const install = document.createElement('button')
+    install.className = 'button primary'
+    install.type = 'button'
+    install.textContent = 'Скопировать установку'
+    install.addEventListener('click', () => copy(installSpec(plugin, version)))
+    foot.append(install)
+    if (plugin.repository?.url) foot.append(link('Репозиторий', plugin.repository.url))
+    else if (plugin.homepage) foot.append(link('Сайт', plugin.homepage))
+
+    node.append(head)
+    if (description.textContent) node.append(description)
+    if (labels.length) node.append(tags)
+    node.append(meta, foot)
+    return node
+  }
+
+  function fact(label, value) {
+    const node = document.createElement('span')
+    if (!value) {
+      node.textContent = label
+      return node
+    }
+    const strong = document.createElement('b')
+    strong.textContent = value
+    node.append(document.createTextNode(label + ' '), strong)
+    return node
+  }
+
+  function link(label, href) {
+    const a = document.createElement('a')
+    a.className = 'plain'
+    a.href = href
+    a.target = '_blank'
+    a.rel = 'noreferrer noopener'
+    a.textContent = label
+    return a
+  }
+
+  function matches(plugin) {
+    if (state.category && plugin.metadata.category !== state.category) return false
+    const query = state.query.trim().toLowerCase()
+    if (!query) return true
+    const haystack = [
+      plugin.name,
+      text(plugin.title),
+      text(plugin.description),
+      plugin.author ?? '',
+      ...plugin.metadata.keywords,
+    ].join(' ').toLowerCase()
+    return query.split(/\s+/).every(word => haystack.includes(word))
+  }
+
+  function sorted(plugins) {
+    const list = [...plugins]
+    if (state.sort === 'name') list.sort((a, b) => text(a.title, a.name).localeCompare(text(b.title, b.name), ru ? 'ru' : 'en'))
+    if (state.sort === 'published') list.sort((a, b) => b.versions[0].publishTimestamp - a.versions[0].publishTimestamp)
+    if (state.sort === 'stars') list.sort((a, b) => (b.metadata.sortKeys.github_stars ?? -1) - (a.metadata.sortKeys.github_stars ?? -1))
+    return list
+  }
+
+  function renderCategories() {
+    const categories = el('categories')
+    categories.replaceChildren()
+    const declared = state.index.metadata.categories
+    const ids = Object.keys(declared)
+    if (ids.length === 0) return
+    const make = (id, label) => {
+      const chip = document.createElement('button')
+      chip.className = 'chip'
+      chip.type = 'button'
+      chip.textContent = label
+      chip.setAttribute('aria-pressed', String(state.category === id))
+      chip.addEventListener('click', () => {
+        state.category = state.category === id ? null : id
+        renderCategories()
+        render()
+      })
+      return chip
+    }
+    categories.append(make(null, 'Все'))
+    for (const id of ids) categories.append(make(id, text(declared[id].title, id)))
+  }
+
+  function render() {
+    if (!state.index) return
+    const plugins = sorted(state.index.plugins.filter(matches))
+    grid.replaceChildren(...plugins.map(card))
+    const empty = el('empty')
+    empty.hidden = plugins.length > 0
+    empty.textContent = plugins.length > 0 ? '' : 'Ничего не нашлось — попробуйте другой запрос или категорию.'
+  }
+
+  async function boot() {
+    el('index-url').textContent = new URL('index.json', location.href).href
+    el('copy-url').addEventListener('click', () => copy(new URL('index.json', location.href).href))
+    el('search').addEventListener('input', event => { state.query = event.target.value; render() })
+    el('sort').addEventListener('change', event => { state.sort = event.target.value; render() })
+
+    try {
+      const response = await fetch(INDEX_URL, { cache: 'no-cache' })
+      if (!response.ok) throw new Error('HTTP ' + response.status)
+      state.index = await response.json()
+    } catch (error) {
+      errorBox.hidden = false
+      errorBox.textContent = 'Не удалось загрузить index.json: ' + error.message
+      return
+    }
+
+    document.title = text(state.index.title, 'Плагины для DSH') + ' — DSH'
+    el('lede').textContent = text(state.index.description, '')
+    el('updated').textContent = 'Плагинов: ' + state.index.plugins.length
+    renderCategories()
+    render()
+  }
+
+  boot()
+})()
+</script>
+</body>
+</html>
