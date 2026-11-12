@@ -265,6 +265,15 @@
       },
       "versions": [
         {
+          "version": "1.2.3",
+          "publishTimestamp": 1794521262,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Music",
+            "commit": "46ccf649d5bbd8f6bcb616b183949a64c2a75d6b"
+          }
+        },
+        {
           "version": "1.0.0",
           "publishTimestamp": 1794514824,
           "source": {
