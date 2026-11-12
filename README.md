@@ -49,7 +49,28 @@ Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`.
 Редиректы запрещены: используйте только финальные адреса. Ссылки вида
 `https://github.com/cyberx3mal/dsh-plugins-index/raw/main/index.json` (302) и `.../blob/...` (HTML) не подойдут.
 
+## Автообновление (GitHub Actions)
+
+`.github/workflows/update-index.yml` запускается каждый час (`17 * * * *` UTC) и вручную:
+Actions → **Update index** → **Run workflow**. Что делает:
+
+1. `scripts/update-index.mjs` для каждой Git-записи берёт из её `source.url` владельца и репозиторий,
+   читает default-branch head через GitHub API, `package.json` этого коммита и дату коммита;
+2. новая версия → добавляется в начало `versions` (старые остаются, хранится до 20);
+3. версия уже есть, но коммит другой → в логе `::warning::` «поднимите version» (индекс не меняется);
+4. `icons/*.svg` обновляются из репозитория того же коммита;
+5. `scripts/validate-index.mjs` проверяет файл валидатором DSH (`@deepseek-ai/dsh-plugin-market-index@0.2.2-rc.2`);
+6. коммит и пуш только если что-то изменилось, от `github-actions[bot]`.
+
+npm-записи (`dsh-better-sidebar`, `dsh-widgets`) workflow не трогает — их версии обновляются вручную.
+После пуша изменения доезжают до пользователей за ~10–20 минут (кеш raw/DSH).
+
+Локальный вариант — `update-index.mjs` в корне: он делает то же самое, но по локальным чек-аутам
+из `checkouts`, без сети и без GitHub API.
+
 ## После релиза плагина
+
+Ручной путь (если не ждать cron):
 
 1. Поднимите `version` в `package.json` плагина, закоммитьте и запушьте.
 2. Запустите `node update-index.mjs` — скрипт возьмёт версию, коммит, время коммита и `icon.svg`
