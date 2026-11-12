@@ -1,12 +1,12 @@
 {
   "format": 1,
   "title": {
-    "en": "cyberx3mal DSH plugins",
-    "ru": "Плагины cyberx3mal для DSH"
+    "en": "cyberx3mal's DSH picks",
+    "ru": "Подборка плагинов для DSH"
   },
   "description": {
-    "en": "Sidebar widgets and helpers for the DeepSeek Harness Web UI",
-    "ru": "Виджеты и помощники для сайдбара DeepSeek Harness"
+    "en": "My DSH plugins plus two community bundles: DSH-better-sidebar and dsh-widgets.",
+    "ru": "Мои плагины для DSH плюс два плагина сообщества: DSH-better-sidebar и dsh-widgets."
   },
   "metadata": {
     "categories": {
@@ -21,6 +21,12 @@
           "en": "Integrations",
           "ru": "Интеграции"
         }
+      },
+      "ui": {
+        "title": {
+          "en": "Interface",
+          "ru": "Интерфейс"
+        }
       }
     },
     "labels": {
@@ -34,6 +40,12 @@
         "title": {
           "en": "Notifications",
           "ru": "Уведомления"
+        }
+      },
+      "third-party": {
+        "title": {
+          "en": "Third-party",
+          "ru": "Сторонний"
         }
       }
     },
@@ -259,6 +271,93 @@
             "type": "git",
             "url": "https://github.com/cyberx3mal/DSH-Music",
             "commit": "a91c1647cc75bf35b33b7e7dc9abc8d2d8c60394"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dsh-better-sidebar",
+      "title": {
+        "en": "Better sidebar",
+        "ru": "Улучшенный сайдбар"
+      },
+      "description": {
+        "en": "VS Code-like right sidebar: files, editor, terminal, git, browser and side chat; other plugins can register tabs.",
+        "ru": "Правая панель в духе VS Code: файлы, редактор, терминал, git, браузер и боковой чат; другие плагины могут добавлять вкладки."
+      },
+      "icon": "icons/better-sidebar.svg",
+      "author": "omdsh-dev",
+      "homepage": "https://github.com/omdsh-dev/DSH-better-sidebar#readme",
+      "repository": {
+        "url": "https://github.com/omdsh-dev/DSH-better-sidebar"
+      },
+      "metadata": {
+        "category": "ui",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "sidebar",
+          "editor",
+          "terminal",
+          "git"
+        ],
+        "labels": [
+          "sidebar",
+          "third-party"
+        ],
+        "sortKeys": {
+          "github_stars": 5117
+        }
+      },
+      "versions": [
+        {
+          "version": "0.32.1",
+          "publishTimestamp": 1794491586,
+          "source": {
+            "type": "npm"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dsh-widgets",
+      "title": {
+        "en": "Widgets rail",
+        "ru": "Панель виджетов"
+      },
+      "description": {
+        "en": "Right-hand widget rail with session stats, context, heatmap, quotas and system monitor cards in a configurable grid.",
+        "ru": "Панель виджетов справа: статистика сессии, контекст, тепловая карта, квоты и системный монитор в настраиваемой сетке."
+      },
+      "icon": "icons/widgets.svg",
+      "author": "Physicolor",
+      "homepage": "https://github.com/Physicolor/dsh-widgets#readme",
+      "repository": {
+        "url": "https://github.com/Physicolor/dsh-widgets"
+      },
+      "metadata": {
+        "category": "widgets",
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "widgets",
+          "dashboard",
+          "stats"
+        ],
+        "labels": [
+          "sidebar",
+          "third-party"
+        ],
+        "sortKeys": {
+          "github_stars": 6
+        }
+      },
+      "versions": [
+        {
+          "version": "1.9.1",
+          "publishTimestamp": 1794491454,
+          "source": {
+            "type": "npm"
           }
         }
       ]

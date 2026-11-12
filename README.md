@@ -1,13 +1,33 @@
 # dsh-plugins-index
 
-Индекс плагинов DSH (формат 1) для проектов cyberx3mal. Версии ставятся из Git-коммитов,
-npm-реестр не нужен. Состав:
+Подборка плагинов DSH (формат 1). Пять своих плагинов ставятся из Git-коммитов, два плагина
+сообщества (`dsh-better-sidebar`, `dsh-widgets`) — из npm. Состав:
 
 ```
-index.json         индекс: 5 плагинов, каждый привязан к коммиту
+index.json         индекс: 7 плагинов
 icons/*.svg        иконки, лежат рядом с индексом (ссылки относительные)
-update-index.mjs   пересобирает index.json из локальных чек-аутов
+update-index.mjs   пересобирает Git-записи из локальных чек-аутов
 ```
+
+Свои плагины (Git, версия = пин на коммит):
+
+| Плагин | Источник |
+|---|---|
+| `dsh-plugin-project-sounds` | `cyberx3mal/DSH-Sounds` |
+| `@local/docker-sidebar` | `cyberx3mal/DSH-Docker` |
+| `@local/sidebar-widget-order` | `cyberx3mal/DSH-sidebar-widget-order` |
+| `@local/projects-board` | `cyberx3mal/DSH-Projects` |
+| `@local/music-board` | `cyberx3mal/DSH-Music` |
+
+Сторонние (npm, MIT, с меткой `third-party`):
+
+| Плагин | Версия | Автор |
+|---|---|---|
+| `dsh-better-sidebar` | 0.32.1 | omdsh-dev |
+| `dsh-widgets` | 1.9.1 | Physicolor |
+
+Для npm-записей `update-index.mjs` ничего не делает: после публикации новой версии у автора
+её нужно дописать в `versions` вручную (версия и `publishTimestamp` из реестра).
 
 ## Подключить в DSH
 

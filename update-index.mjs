@@ -28,6 +28,8 @@ for (const dirty of ['index.json']) {
 }
 
 for (const plugin of index.plugins) {
+  // npm-sourced entries (third-party) have no local checkout to read from.
+  if (plugin.versions[0]?.source?.type !== 'git') continue
   const dir = checkouts[plugin.name]
   if (dir === undefined) {
     console.warn(`skip ${plugin.name}: no checkout configured`)
