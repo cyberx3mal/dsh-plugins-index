@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-// Refresh index.json from the local checkouts: current version, commit, commit time, icon.
+// Refresh index.json from the local checkouts: version and commit of HEAD, commit time, icon.
 // Run after pushing a plugin release:  node update-index.mjs
+// The manifest is read from HEAD, not from the working tree, so an uncommitted version bump
+// can never pair a new version with an older commit in index.json.
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { dirname, join } from 'node:path'
@@ -39,7 +41,13 @@ for (const plugin of index.plugins) {
     problems.push(`${plugin.name}: ${dir} has no package.json`)
     continue
   }
-  const manifest = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8'))
+  let manifest
+  try {
+    manifest = JSON.parse(git(dir, 'show', 'HEAD:package.json'))
+  } catch (error) {
+    problems.push(`${plugin.name}: ${dir} has no package.json at HEAD (${error.message})`)
+    continue
+  }
   if (manifest.name !== plugin.name) {
     problems.push(`${plugin.name}: ${dir} declares ${manifest.name}`)
     continue

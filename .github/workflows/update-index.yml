@@ -1,0 +1,59 @@
+name: Update index
+
+# Refresh index.json from the plugin repositories and the npm registry.
+#
+# The refresh script prepends versions that are not listed yet, re-pins a Git
+# entry that points at a commit whose package.json declares another version,
+# and warns when a commit moved without a version bump. Every run validates the
+# result with the same validator DSH uses before it shows an index.
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-index
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Refresh index.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/update-index.mjs
+
+      - name: Validate with the DSH validator
+        run: |
+          mkdir -p "$RUNNER_TEMP/validator"
+          cd "$RUNNER_TEMP/validator"
+          npm init -y > /dev/null
+          npm install --no-audit --no-fund --legacy-peer-deps @deepseek-ai/dsh-plugin-market-index@0.2.2-rc.2
+          cd "$GITHUB_WORKSPACE"
+          VALIDATOR_PATH="$RUNNER_TEMP/validator/node_modules/@deepseek-ai/dsh-plugin-market-index/lib/index.js" \
+          INDEX_URL="https://raw.githubusercontent.com/cyberx3mal/dsh-plugins-index/main/index.json" \
+          node scripts/validate-index.mjs
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet -- index.json icons; then
+            echo "index.json is current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json icons
+          git commit -m "Update index.json"
+          git push

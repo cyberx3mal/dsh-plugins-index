@@ -137,11 +137,11 @@
       "versions": [
         {
           "version": "1.1.0",
-          "publishTimestamp": 1794511387,
+          "publishTimestamp": 1794561725,
           "source": {
             "type": "git",
             "url": "https://github.com/cyberx3mal/DSH-Docker",
-            "commit": "58cb8e9a47b4bfabe013d73f2d0778c2c9cf430c"
+            "commit": "74be0580192e6a0bd7dd8c5e73d1b00166d1ac1a"
           }
         }
       ]
@@ -274,6 +274,15 @@
       },
       "versions": [
         {
+          "version": "1.2.5",
+          "publishTimestamp": 1794522689,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Music",
+            "commit": "fce9d464507be730f8e833a22007cb81545c87ec"
+          }
+        },
+        {
           "version": "1.2.4",
           "publishTimestamp": 1794522461,
           "source": {
@@ -380,6 +389,13 @@
         }
       },
       "versions": [
+        {
+          "version": "1.9.2",
+          "publishTimestamp": 1794539638,
+          "source": {
+            "type": "npm"
+          }
+        },
         {
           "version": "1.9.1",
           "publishTimestamp": 1794491454,
