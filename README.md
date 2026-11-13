@@ -80,7 +80,8 @@ Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`.
 
 ## Автообновление (GitHub Actions)
 
-`.github/workflows/update-index.yml` запускается каждый час (`17 * * * *` UTC) и вручную:
+`.github/workflows/update-index.yml` запускается каждые 10 минут (`*/10 * * * *` UTC),
+по событию `repository_dispatch` (тип `plugin-release`) и вручную:
 Actions → **Update index** → **Run workflow**. Что делает:
 
 1. `scripts/update-index.mjs` для каждой Git-записи берёт из её `source.url` владельца и репозиторий,
@@ -97,7 +98,24 @@ Actions → **Update index** → **Run workflow**. Что делает:
    ставится в CI через npm);
 7. коммит и пуш только если что-то изменилось, от `github-actions[bot]`.
 
-После пуша изменения доезжают до пользователей за ~10–20 минут (кеш raw/DSH).
+Индекс обязан пинить коммит: формат принимает в `source.commit` только полный 40-символьный SHA,
+ветку или тег записать нельзя. Поэтому «актуальность» — это частота обновления индекса: после пуша
+в репозиторий плагина запись обновляется в течение ~10 минут (или сразу, если репозиторий плагина
+дёрнет этот workflow через `repository_dispatch`). Установка из индекса затем ставит именно
+запиненный коммит реального репозитория (`git+https://github.com/<owner>/<repo>.git#<sha>`).
+
+Немедленный запуск из репозитория плагина (нужен токен, умеющий писать в этот репозиторий):
+
+```yaml
+- run: |
+    curl -fsS -X POST \
+      -H "Authorization: Bearer ${{ secrets.INDEX_TOKEN }}" \
+      -H "Accept: application/vnd.github+json" \
+      https://api.github.com/repos/cyberx3mal/dsh-plugins-index/dispatches \
+      -d '{"event_type":"plugin-release"}'
+```
+
+После пуша индекса изменения доезжают до пользователей за ~10–20 минут (кеш raw/DSH).
 
 Локальный вариант — `update-index.mjs` в корне: он делает то же самое для Git-записей, но по
 локальным чек-аутам из `checkouts`, без сети и без GitHub API. Версию он берёт из `HEAD`, поэтому

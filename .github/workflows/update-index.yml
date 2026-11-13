@@ -6,11 +6,18 @@ name: Update index
 # entry that points at a commit whose package.json declares another version,
 # and warns when a commit moved without a version bump. Every run validates the
 # result with the same validator DSH uses before it shows an index.
+#
+# A push to a plugin repository reaches the index within the schedule interval.
+# A plugin repository that wants it immediately can call this workflow through
+# repository_dispatch (event type: plugin-release) with a token that may write
+# to this repository.
 
 on:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
+  repository_dispatch:
+    types: [plugin-release]
 
 permissions:
   contents: write
