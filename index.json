@@ -136,6 +136,15 @@
       },
       "versions": [
         {
+          "version": "1.2.0",
+          "publishTimestamp": 1794590462,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/cyberx3mal/DSH-Docker",
+            "commit": "dae88e501b1317c007df0317a499f1df0c20972e"
+          }
+        },
+        {
           "version": "1.1.0",
           "publishTimestamp": 1794561725,
           "source": {
